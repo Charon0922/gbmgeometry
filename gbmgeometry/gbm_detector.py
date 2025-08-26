@@ -5,7 +5,6 @@ from astropy.coordinates import (
     get_sun,
     get_body,
     get_body_barycentric,
-    get_moon,
 )
 from spherical_geometry.polygon import SphericalPolygon
 import astropy.units as u
@@ -258,11 +257,10 @@ class GBMDetector(object):
 
     @property
     def moon_position_icrs(self):
-        """                                                                                                                                                                                                                                                                   
-        :return: moon position as SkyCood object in icrs frame                                                                                                                                                                                                                
         """
-        tmp_moon = get_moon(self._time)
-        # in ICRS
+        :return: moon position as SkyCoord object in icrs frame
+        """
+        tmp_moon = get_body('moon', self._time)
         return SkyCoord(
             tmp_moon.ra.deg,
             tmp_moon.dec.deg,
